@@ -1,0 +1,182 @@
+.nav-sidebar .nav-link>.right, .nav-sidebar .nav-link>p>.right {
+	right: .2rem;
+}
+.select2-container .select2-selection--single,
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+	height: 38px;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+	background-color: #28a745;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+	color: #fff;
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+	color: #dc3545;
+}
+.select2-selection__rendered {
+	font-size: 13px;	
+}
+.select2-container .select2-selection--single .select2-selection__rendered {
+	padding-left: 0;
+}
+.for-dashboard table th,
+.for-dashboard table td { 
+	padding: .5rem .75rem;
+	vertical-align: middle;
+	border-top: none;
+}
+table th,
+table td { 
+	padding: .5rem .75rem;
+	vertical-align: middle;
+}
+table.dataTable>thead .sorting:before, 
+table.dataTable>thead .sorting:after, 
+table.dataTable>thead .sorting_asc:before, 
+table.dataTable>thead .sorting_asc:after, 
+table.dataTable>thead .sorting_desc:before, 
+table.dataTable>thead .sorting_desc:after, 
+table.dataTable>thead .sorting_asc_disabled:before, 
+table.dataTable>thead .sorting_asc_disabled:after, 
+table.dataTable>thead .sorting_desc_disabled:before, 
+table.dataTable>thead .sorting_desc_disabled:after {
+	bottom: .5rem;
+}
+.btn,
+.form-group label,
+.form-control {
+	font-size: 14px;
+}
+table.table-bordered>thead {
+	font-size: 13px;
+}
+table.table-bordered>tbody,
+table.table-bordered>tfoot,
+.input-group-text{
+	font-size: 12px;
+}
+td>.btn-group-sm>.btn, 
+.btn-sm,
+.btn.btn-sm{
+	font-size: 11px;
+}
+.content-header p {
+	color: grey;
+}
+.dropdown-menu.show {
+	padding: 10px;
+}
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon-chevron-up:before {
+  content: "\e113";
+}
+.glyphicon-chevron-down:before {
+  content: "\e114";
+}
+.glyphicon-chevron-left:before {
+ content: "\e079";
+}
+.glyphicon-chevron-right:before {
+ content: "\e080";
+}
+.sidebar {
+	height : calc(100vh - 55px);
+}
+.bootstrap-datetimepicker-widget.dropdown-menu {
+	width: 21em;
+}
+label.error {
+	color: #dc3545;
+	font-size: 10px !important;
+}
+.rain-bg{
+	background-color: #87cefa !important;
+	color: #ffffff;
+}
+.rain-bd{
+	border-color: #87cefa !important;
+}
+.rain-bg-other {
+	background-color: #93d3fb !important;
+	color: #ffffff;
+}
+.rain-bd-other{
+	border-color: #93d3fb !important;
+}
+
+.fuel-bg{
+	background-color: #ff7514 !important;
+	color: #ffffff;
+}
+.fuel-bd{
+	border-color: #ff7514 !important;
+}
+.fuel-bg-other {
+	background-color: #ff9034 !important;
+	color: #ffffff;
+}
+.fuel-bd-other{
+	border-color: #ff9034 !important;
+}
+
+.ob-bg{
+	background-color: #C0C1C7 !important;
+	color: #000000;
+}
+.ob-bd{
+	border-color: #C0C1C7 !important;
+}
+.ob-bg-other {
+	background-color: #CFCFC3 !important;
+	color: #000000;
+}
+.ob-bd-other{
+	border-color: #CFCFC3 !important;
+}
+
+.coalg-bg{
+	background-color: #292929 !important;
+	color: #ffffff;
+}
+.coalg-bd{
+	border-color: #292929 !important;
+}
+.coalg-bg-other {
+	background-color: #444444 !important;
+	color: #ffffff;
+}
+.coalg-bd-other{
+	border-color: #444444 !important;
+}
+
+.coalh-bg{
+	background-color: #444444 !important;
+	color: #ffffff;
+}
+.coalh-bd{
+	border-color: #444444 !important;
+}
+.coalh-bg-other {
+	background-color: #9C9C9C !important;
+	color: #ffffff;
+}
+.coalh-bd-other{
+	border-color: #9C9C9C !important;
+}

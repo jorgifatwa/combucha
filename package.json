@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dropzone": "^6.0.0-beta.2",
+    "handsontable": "^11.1.0"
+  }
+}

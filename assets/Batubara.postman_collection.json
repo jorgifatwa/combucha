@@ -1,0 +1,672 @@
+{
+	"info": {
+		"_postman_id": "5472107c-fe9c-4d84-b5d0-d3bfcbafd09b",
+		"name": "Batubara",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "username",
+							"value": "jorgifatwaambia@gmail.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "enok1212",
+							"type": "default"
+						},
+						{
+							"key": "fcm_token\n",
+							"value": "123123",
+							"type": "default"
+						},
+						{
+							"key": "uuid",
+							"value": "321321",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}api/auth/login",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Blok",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Loading Unit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Loader Model",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Hauling Unit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Hauler Model",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Material",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Disposal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Seam",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Blob",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Lokasi",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Front",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Master Data - Site",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Breakdown",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Fleet Event",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Breakdown",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Fleet Event",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Post Create Breakdown",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "5b08fe6dcc69639986d39c4b435ef1fce73f2077",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tanggal",
+							"value": "2021-01-01",
+							"type": "text"
+						},
+						{
+							"key": "type_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "loading_unit_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "loading_model_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "job_status_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tanggal_bd",
+							"value": "2021-01-02",
+							"type": "text"
+						},
+						{
+							"key": "time_down",
+							"value": "08:33:00",
+							"type": "text"
+						},
+						{
+							"key": "start",
+							"value": "15:33:00",
+							"type": "text"
+						},
+						{
+							"key": "stop",
+							"value": "17:33:00",
+							"type": "text"
+						},
+						{
+							"key": "hours",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "hm",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "day",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "trouble_description",
+							"value": "test trouble",
+							"type": "text"
+						},
+						{
+							"key": "activity_today",
+							"value": "test activity",
+							"type": "text"
+						},
+						{
+							"key": "breakdown_position_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "breakdown_status_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "component_freq_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "component_duration_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}api/breakdown/create",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"breakdown",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Create Fleet Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "5b08fe6dcc69639986d39c4b435ef1fce73f2077",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tanggal",
+							"value": "2021-01-01",
+							"type": "text"
+						},
+						{
+							"key": "type_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "loading_unit_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "loading_model_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "job_status_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tanggal_bd",
+							"value": "2021-01-02",
+							"type": "text"
+						},
+						{
+							"key": "time_down",
+							"value": "08:33:00",
+							"type": "text"
+						},
+						{
+							"key": "start",
+							"value": "15:33:00",
+							"type": "text"
+						},
+						{
+							"key": "stop",
+							"value": "17:33:00",
+							"type": "text"
+						},
+						{
+							"key": "hours",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "hm",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "day",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "trouble_description",
+							"value": "test trouble",
+							"type": "text"
+						},
+						{
+							"key": "activity_today",
+							"value": "test activity",
+							"type": "text"
+						},
+						{
+							"key": "breakdown_position_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "breakdown_status_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "component_freq_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "component_duration_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}api/breakdown/create",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"breakdown",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Edit Fleet Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "5b08fe6dcc69639986d39c4b435ef1fce73f2077",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tanggal",
+							"value": "2021-01-01",
+							"type": "text"
+						},
+						{
+							"key": "type_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "loading_unit_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "loading_model_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "job_status_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tanggal_bd",
+							"value": "2021-01-02",
+							"type": "text"
+						},
+						{
+							"key": "time_down",
+							"value": "08:33:00",
+							"type": "text"
+						},
+						{
+							"key": "start",
+							"value": "15:33:00",
+							"type": "text"
+						},
+						{
+							"key": "stop",
+							"value": "17:33:00",
+							"type": "text"
+						},
+						{
+							"key": "hours",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "hm",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "day",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "trouble_description",
+							"value": "test trouble",
+							"type": "text"
+						},
+						{
+							"key": "activity_today",
+							"value": "test activity",
+							"type": "text"
+						},
+						{
+							"key": "breakdown_position_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "breakdown_status_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "component_freq_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "component_duration_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}api/breakdown/create",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"breakdown",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Edit Breakdown",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "5b08fe6dcc69639986d39c4b435ef1fce73f2077",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "tanggal",
+							"value": "2021-01-01",
+							"type": "text"
+						},
+						{
+							"key": "type_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "loading_unit_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "loading_model_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "job_status_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tanggal_bd",
+							"value": "2021-01-02",
+							"type": "text"
+						},
+						{
+							"key": "time_down",
+							"value": "08:33:00",
+							"type": "text"
+						},
+						{
+							"key": "start",
+							"value": "15:33:00",
+							"type": "text"
+						},
+						{
+							"key": "stop",
+							"value": "17:33:00",
+							"type": "text"
+						},
+						{
+							"key": "hours",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "hm",
+							"value": "test",
+							"type": "text"
+						},
+						{
+							"key": "day",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "trouble_description",
+							"value": "test trouble",
+							"type": "text"
+						},
+						{
+							"key": "activity_today",
+							"value": "test activity",
+							"type": "text"
+						},
+						{
+							"key": "breakdown_position_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "breakdown_status_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "component_freq_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "component_duration_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}api/breakdown/create",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"breakdown",
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
