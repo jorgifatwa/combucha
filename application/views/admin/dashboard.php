@@ -17,11 +17,11 @@
 <!-- Main content -->
 <section class="content for-dashboard">
 	<div class="row">
-		<div class="col-lg-4 col-6">
+		<div class="col-lg-12 col-12">
 			<div class="small-box bg-success">
 			  <div class="inner">
 				<h3><?php echo '0'; ?></h3>
-				<p>Pendapatan Bersih Bulan Ini</p>
+				<p>Pendapatan Bulan Ini</p>
 			  </div>
 			  <div class="icon">
 				<i class="fa fa-coins "></i>
@@ -31,7 +31,7 @@
 			  </p>
 			</div>
 		</div>
-		<div class="col-lg-4 col-6">
+		<!-- <div class="col-lg-4 col-6">
 			<div class="small-box bg-primary">
 			  <div class="inner">
 				<h3><?php echo '0'; ?></h3>
@@ -44,8 +44,8 @@
 				<br>
 			  </p>
 			</div>
-		</div>
-		<div class="col-lg-4 col-6">
+		</div> -->
+		<!-- <div class="col-lg-4 col-6">
 			<div class="small-box bg-danger">
 			  <div class="inner">
 				<h3><?php echo '0'; ?></h3>
@@ -58,10 +58,10 @@
 				<br>
 			  </p>
 			</div>
-		</div>
+		</div> -->
 	</div>
 
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
@@ -200,6 +200,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </section>
 <script data-main="<?php echo base_url() ?>assets/js/main/main-dashboard" src="<?php echo base_url() ?>assets/js/require.js"></script>
