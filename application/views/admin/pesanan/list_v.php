@@ -48,7 +48,7 @@
                 </tfoot>
               </table>
               <div class="text-right mt-3">
-                  <button id="checkout" class="btn btn-success">Checkout</button>
+                  <a id="checkout" href="<?php echo base_url('Pesanan/checkout') ?>" class="btn btn-success">Checkout</a>
                   <button id="clear-cart" class="btn btn-danger">Clear Cart</button>
               </div>
           </div>
@@ -106,7 +106,7 @@
         </div>
       </div>
       <div class="pagination-links text-right mb-2">
-          <nav aria-label="Page navigation">
+          <nav aria-label="Page navigation" class="pagination-data">
                   <?php echo $links; ?>
           </nav>
       </div>

@@ -2,13 +2,13 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1 class="m-0">Kategori Produk Baru</h1>
-        <p class="m-0">Kategori Produk</p>
+        <h1 class="m-0">Checkout</h1>
+        <p class="m-0">Pesanan</p>
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="<?php echo base_url() ?>kategori_produk"></i>Kategori Produk</a></li>
-          <li class="breadcrumb-item active">Kategori Produk Baru</li>
+          <li class="breadcrumb-item"><a href="<?php echo base_url() ?>kategori_produk"></i>Pesanan</a></li>
+          <li class="breadcrumb-item active">Checkout</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -21,15 +21,9 @@
             <form id="form" method="post" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="form-group row">
-                        <label class="form-label col-sm-3" for="">Nama Kategori Produk</label>
-                        <div class="col-sm-4">
-                            <input class="form-control" type="text" id="name" name="name" autocomplete="off" placeholder="Nama Kategori Produk">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="form-label col-sm-3" for="">Deskripsi</label>
-                        <div class="col-sm-4">
-                            <textarea name="description" id="description" class="form-control" placeholder="Deskripsi" cols="30" rows="10"></textarea>
+                        <label class="form-label col-sm-3" for="">Nama Pelanggan</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" id="name" name="name" autocomplete="off" placeholder="Nama Pelanggan">
                         </div>
                     </div>
                 </div>

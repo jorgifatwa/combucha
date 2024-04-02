@@ -113,4 +113,21 @@ class Produk_model extends CI_Model
         $this->db->or_like('keterangan', $keyword);
         return $this->db->get('produk')->result();
     }
+
+    public function fetch_produk_search($limit, $start, $keyword) {
+        $this->db->like('nama', $keyword);
+        $this->db->or_like('keterangan', $keyword);
+        $this->db->limit($limit, $start);
+        $query = $this->db->get('produk');
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+        return false;
+    }
+
+    public function record_count_search($keyword) {
+        $this->db->like('nama', $keyword);
+        $this->db->or_like('keterangan', $keyword);
+        return $this->db->count_all_results("produk");
+    }    
 }

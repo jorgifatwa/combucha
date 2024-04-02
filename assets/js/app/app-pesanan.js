@@ -53,6 +53,7 @@ define([
             })
 
             function handleAddToCart() {
+                $('#data-produk').off('click', '.add-to-cart'); // Unbind existing event handlers
                 $('#data-produk').on('click', '.add-to-cart', function(e) {
                     e.preventDefault();
                     var productId = $(this).data('id');
@@ -77,33 +78,35 @@ define([
                     type: 'POST',
                     url: $(this).attr('action'),
                     data: formData,
-                    success: function(response) {
-                        var data = JSON.parse(response);
+                    success: function(data) {
+                        var data = JSON.parse(data);
+                        $('.pagination-data').html(data.links);
                         var html = "";
+                        data = data.data_produks;
                         for (let index = 0; index < data.length; index++) {
                             html += `<div class="col-md-4">
                                         <div class="card" style="width: 18rem; height: 28rem;">
-                                          <img src="${App.baseUrl}uploads/produk/${data[index].gambar}" class="card-img-top" alt="${data[index].nama}">
-                                          <div class="card-body">
+                                            <img src="${App.baseUrl}uploads/produk/${data[index].gambar}" class="card-img-top" alt="${data[index].nama}">
+                                            <div class="card-body">
                                             <div class="row">
-                                              <div class="col-md-12">
+                                                <div class="col-md-12">
                                                 <h5 class="card-title">${data[index].nama}</h5>
                                                 <p class="card-text text-secondary">${data[index].keterangan}</p>
-                                              </div>
+                                                </div>
                                             </div>
-                                          </div>
-                                          <div class="card-footer">
+                                            </div>
+                                            <div class="card-footer">
                                             <div class="row">
-                                              <div class="col-md-4">
+                                                <div class="col-md-4">
                                                 <p>${formatIDR(data[index].harga)}</p>
-                                              </div>
-                                              <div class="col-md-8 text-right">
+                                                </div>
+                                                <div class="col-md-8 text-right">
                                                 <a href="#" class="btn btn-primary add-to-cart" data-id="${data[index].id}" data-name="${data[index].nama}" data-price="${data[index].harga}" data-image="${data[index].gambar}">Tambah</a>
-                                              </div>
+                                                </div>
                                             </div>
-                                          </div>
+                                            </div>
                                         </div>
-                                      </div>`;
+                                        </div>`;
                         } 
                         $('#data-produk').html(html);
                         handleAddToCart();
@@ -179,39 +182,50 @@ define([
                 $("#cart-items").empty();
             }
             
+            $(document).on('click', '.page-item a', function(e) {
+                e.preventDefault();
+                var page = $(this).attr('href').split('?page=')[1]; // Extract page number from data attribute
+                $.ajax({
+                url: 'Pesanan/pagination?page=' + page,
+                type: 'GET',
+                success: function(data) {
+                    var data = JSON.parse(data);
+                    $('.pagination-data').html(data.links);
+                    var html = "";
+                    data = data.data_produks;
+                    for (let index = 0; index < data.length; index++) {
+                        html += `<div class="col-md-4">
+                                    <div class="card" style="width: 18rem; height: 28rem;">
+                                        <img src="${App.baseUrl}uploads/produk/${data[index].gambar}" class="card-img-top" alt="${data[index].nama}">
+                                        <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                            <h5 class="card-title">${data[index].nama}</h5>
+                                            <p class="card-text text-secondary">${data[index].keterangan}</p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="card-footer">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                            <p>${formatIDR(data[index].harga)}</p>
+                                            </div>
+                                            <div class="col-md-8 text-right">
+                                            <a href="#" class="btn btn-primary add-to-cart" data-id="${data[index].id}" data-name="${data[index].nama}" data-price="${data[index].harga}" data-image="${data[index].gambar}">Tambah</a>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>`;
+                    } 
+                    $('#data-produk').html(html);
+                    handleAddToCart();
+                }
+                });
+            }); 
         },
         initTable : function(){
-            App.table = $('#table').DataTable({
-                "language": {
-                    "search": "Cari",
-                    "lengthMenu": "Lihat _MENU_ data",
-                    "zeroRecords": "Tidak ada data yang cocok ditemukan",
-                    "info": "Menampilkan _START_ hingga _END_ dari _TOTAL_ data",
-                    "infoEmpty": "Tidak ada data di dalam tabel",
-                    "infoFiltered": "(cari dari _MAX_ total catatan)",
-                    "loadingRecords": "Loading...",
-                    "processing": "Processing...",
-                    "paginate": {
-                        "first":      "Pertama",
-                        "last":       "Terakhir",
-                        "next":       "Selanjutnya",
-                        "previous":   "Sebelumnya"
-                    },
-                },
-                "order": [[ 0, "asc" ]], //agar kolom id default di order secara desc
-                "processing": true,
-                "serverSide": true,
-                "ajax":{
-                    "url": App.baseUrl+"kategori_produk/dataList",
-                    "dataType": "json",
-                    "type": "POST",
-                },
-                "columns": [
-                    { "data": "nama" },
-                    { "data": "description" },
-                    { "data": "action" ,"orderable": false}
-                ]
-            });
+                        
         },
         initValidation : function(){
             if($("#form").length > 0){
@@ -260,7 +274,6 @@ define([
         initConfirm :function(){
             $('#table tbody').on( 'click', '.delete', function () {
                 var url = $(this).attr("url");
-                console.log(url);
                 App.confirm("Apakah anda yakin untuk mengubah ini?",function(){
                    $.ajax({
                       method: "GET",
