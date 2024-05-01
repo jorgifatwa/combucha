@@ -142,11 +142,12 @@ define([
                     // If item does not exist, add new item to cart
                     var formattedPrice = formatIDR(productPrice); // Format price to IDR currency format
                     var cartItemHtml = "<tr class='cart-item' data-id='" + productId + "'>" +
-                                            "<td class='name'>" + productName + "</td>" +
+                                            "<td class='name'><input type='hidden' name='id_produk[]' value='"+productId+"'><input type='hidden' name='nama[]' value='"+productName+"'>" + productName + "</td>" +
                                             "<td class='price'>" + formattedPrice + "</td>" +
-                                            "<td><input type='number' class='form-control quantity' value='1' min='1'></td>" +
+                                            "<td><input type='number' class='form-control quantity' name='quantity[]' value='1' min='1'></td>" +
                                             "<td><button class='btn btn-sm btn-danger btn-remove' data-id='" + productId + "'>Remove</button></td>" +
                                         "</tr>";
+
                     $("#cart-items").append(cartItemHtml);
                 }
 
@@ -223,6 +224,61 @@ define([
                 }
                 });
             }); 
+
+            $('input[name="metode_pembayaran"]').change(function() {
+                var selectedValue = $(this).val();
+                if (selectedValue === "cash") {
+                    $('.tunai').removeClass('d-none');
+                    $('.non_tunai').addClass('d-none');
+                } else if (selectedValue === "qris") {
+                    $('.tunai').addClass('d-none');
+                    $('.non_tunai').removeClass('d-none');
+                }
+            });
+
+            $('#jumlah_uang').on('input', function() {
+                // Membersihkan input dari karakter non-numerik, kecuali koma dan titik desimal
+                var cleanInput = $(this).val().replace(/[^\d.,]/g, '');
+            
+                // Hapus tanda desimal jika lebih dari satu
+                cleanInput = cleanInput.replace(/(\..*)\./g, '$1');
+            
+                // Ganti tanda titik dengan string kosong (untuk menghindari kesalahan dalam parsing)
+                cleanInput = cleanInput.replace(/\./g, '');
+            
+                // Ubah koma menjadi titik jika digunakan sebagai pemisah desimal
+                cleanInput = cleanInput.replace(/,/g, '.');
+            
+                // Parsing input jumlah uang menjadi angka desimal
+                var jumlahUang = parseFloat(cleanInput);
+            
+                // Set nilai input dengan angka yang sudah diparsing
+                $(this).val(jumlahUang.toLocaleString('id-ID', {
+                    maximumFractionDigits: 0
+                }));
+            
+                // Lakukan perhitungan kembalian
+                var totalPembayaran = parseFloat($('#total_pembayaran').val().replace(/[^\d]/g, ''));
+                var kembalian = jumlahUang - totalPembayaran;
+
+                // Tampilkan kembalian
+                if (kembalian < 0) {
+                    $('.error-jumlah').removeClass('d-none');
+                    $('.btn-simpan').attr('disabled', '');
+                    $('#kembalian').val('Rp 0');
+                }else if(cleanInput == "") {
+                    $('.btn-simpan').attr('disabled', '');
+                    $('#kembalian').val('Rp 0');
+                    $('#jumlah_uang').val('0');
+                }else {
+                    $('#kembalian').val('Rp ' + kembalian.toLocaleString('id-ID', {
+                        maximumFractionDigits: 0
+                    }));
+                    $('.btn-simpan').removeAttr('disabled');
+                    $('.error-jumlah').addClass('d-none');
+                }
+            });
+            
         },
         initTable : function(){
                         
@@ -258,6 +314,55 @@ define([
                                 error.insertBefore( element.next( "label" ) );
                             }else if ( element.prop( "type" ) === "radio" ) {
                                 error.insertBefore( element.parent().parent().parent());
+                            }else if ( element.parent().attr('class') === "input-group" ) {
+                                error.appendTo(element.parent().parent());
+                            }else{
+                                error.insertAfter(element);
+                            }
+                        }
+                    },
+                    submitHandler : function(form) {
+                        form.submit();
+                    }
+                });
+            }
+
+            if($("#form_checkout").length > 0){
+                $("#save-btn").removeAttr("disabled");
+                $("#form_checkout").validate({
+                    rules: {
+                        nama_pelanggan: {
+                            required: true
+                        },
+                        metode_pembayaran: {
+                            required: true
+                        },
+                    },
+                    messages: {
+                        nama_pelanggan: {
+                            required: "Nama Pelanggan Harus Diisi"
+                        },
+                        metode_pembayaran: {
+                            required: "Metode Pembayaran Harus Diisi"
+                        }
+                    },
+                    debug:true,
+
+                    errorPlacement: function(error, element) {
+                        var name = element.attr('name');
+                        var errorSelector = '.form-control-feedback[for="' + name + '"]';
+                        var $element = $(errorSelector);
+                        if ($element.length) {
+                            $(errorSelector).html(error.html());
+                        } else {
+                            if ( element.prop( "type" ) === "select-one" ) {
+                                error.appendTo(element.parent());
+                            }else if ( element.prop( "type" ) === "select-multiple" ) {
+                                error.appendTo(element.parent());
+                            }else if ( element.prop( "type" ) === "checkbox" ) {
+                                error.insertBefore( element.next( "label" ) );
+                            }else if ( element.prop( "type" ) === "radio" ) {
+                                error.appendTo(element.parent().siblings('.error-radio'));
                             }else if ( element.parent().attr('class') === "input-group" ) {
                                 error.appendTo(element.parent().parent());
                             }else{

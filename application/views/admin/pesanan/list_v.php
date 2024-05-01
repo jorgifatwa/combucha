@@ -21,39 +21,41 @@
       <div class="card-header">
           <h3>Keranjang</h3>
       </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="container mt-4 cart-container">
-              <table class="table cart-table">
-                  <thead>
+      <form action="<?php echo base_url('Pesanan/checkout') ?>" method="post">
+        <div class="card-body">
+          <div class="row">
+            <div class="container mt-4 cart-container">
+                <table class="table cart-table">
+                    <thead>
+                        <tr>
+                            <th>Produk</th>
+                            <th>Harga</th>
+                            <th>Jumlah</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                        <!-- Cart items will be displayed here -->
+                    </tbody>
+                    <tfoot>
                       <tr>
-                          <th>Produk</th>
-                          <th>Harga</th>
-                          <th>Jumlah</th>
-                          <th>Aksi</th>
+                          <td colspan="3" class="text-right">Subtotal:</td>
+                          <td><span id="subtotal">Rp. 0.00</span></td>
                       </tr>
-                  </thead>
-                  <tbody id="cart-items">
-                      <!-- Cart items will be displayed here -->
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                        <td colspan="3" class="text-right">Subtotal:</td>
-                        <td><span id="subtotal">Rp. 0.00</span></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" class="text-right">Total:</td>
-                        <td><span id="total">Rp. 0.00</span></td>
-                    </tr>
-                </tfoot>
-              </table>
-              <div class="text-right mt-3">
-                  <a id="checkout" href="<?php echo base_url('Pesanan/checkout') ?>" class="btn btn-success">Checkout</a>
-                  <button id="clear-cart" class="btn btn-danger">Clear Cart</button>
-              </div>
+                      <tr>
+                          <td colspan="3" class="text-right">Total:</td>
+                          <td><span id="total">Rp. 0.00</span></td>
+                      </tr>
+                  </tfoot>
+                </table>
+                <div class="text-right mt-3">
+                    <button type="submit" id="checkout" class="btn btn-success">Checkout</a>
+                    <button id="clear-cart" class="btn btn-danger">Clear Cart</button>
+                </div>
+            </div>
           </div>
-        </div>
-      </div>    
+        </div>    
+      </form>
     </div>
     <div class="card mb-3">
         <div class="card-header">

@@ -24,7 +24,7 @@ class Pesanan extends Admin_Controller
 		$total_data = $this->produk_model->record_count();
 
 		// Tentukan jumlah data per halaman
-		$per_page = 1;
+		$per_page = 9;
 
 		// Hitung jumlah halaman jika total data tidak nol
 		if ($total_data > 0) {
@@ -65,7 +65,7 @@ class Pesanan extends Admin_Controller
 		$total_data = $this->produk_model->record_count();
 
 		// Tentukan jumlah data per halaman
-		$per_page = 1;
+		$per_page = 9;
 
 		// Hitung jumlah halaman jika total data tidak nol
 		if ($total_data > 0) {
@@ -108,7 +108,7 @@ class Pesanan extends Admin_Controller
 		$total_data = $this->produk_model->record_count_search($keyword);
 
 		// Tentukan jumlah data per halaman
-		$per_page = 1;
+		$per_page = 9;
 
 		// Hitung jumlah halaman jika total data tidak nol
 		if ($total_data > 0) {
@@ -146,34 +146,22 @@ class Pesanan extends Admin_Controller
 
 	public function checkout() 
 	{
-		$this->form_validation->set_rules('name', "Nama Harus Diisi", 'trim|required');
-
-		if ($this->form_validation->run() === TRUE) {
-			
-			$data = array(
-				'nama' => $this->input->post('name'),
-				'description' => $this->input->post('description'),
-				'created_at' => date('Y-m-d H:i:s'),
-				'created_by' => $this->data['users']->id
-			);
-
-
-			$insert = $this->pesanan_model->insert($data);
-
-			if ($insert) {
-				$this->session->set_flashdata('message', "Kategori Produk Baru Berhasil Disimpan");
-				redirect("pesanan");
-			} else {
-				$this->session->set_flashdata('message_error', "Kategori Produk Baru Gagal Disimpan");
-				redirect("pesanan");
+		$this->data['id_produk'] = $_POST['id_produk'];
+		$this->data['quantity'] = $_POST['quantity'];
+		$this->data['total'] = 0;
+		for ($i = 0; $i < count($_POST['quantity']); $i++) {
+			$produk[$i] = $this->produk_model->getAllById(array("produk.id" => $_POST['id_produk'][$i]));
+			foreach ($produk[$i] as $key => $value) {
+				$this->data['sub_total'][$i] = $value->harga * intval($_POST['quantity'][$i]);
+				$this->data['total'] += $this->data['sub_total'][$i];
 			}
-		} else {
-			$this->data['content'] = 'admin/pesanan/checkout_v';
-			$this->load->view('admin/layouts/page', $this->data);
 		}
+		$this->data['nama'] = $_POST['nama'];
+		$this->data['content'] = 'admin/pesanan/checkout_v';
+		$this->load->view('admin/layouts/page', $this->data);
 	}
 
-	public function edit() 
+	public function create_pesanan() 
 	{
 		$this->form_validation->set_rules('name', "Nama Harus Diisi", 'trim|required');
 

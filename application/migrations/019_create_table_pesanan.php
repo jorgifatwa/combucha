@@ -25,7 +25,10 @@ class Migration_create_table_pesanan extends CI_Migration {
 			'tanggal_pesanan'      => [
 				'type' => 'DATE',
 			],
-			'id_pelanggan'          => [
+			'id_produk'          => [
+				'type' => 'TINYINT(4)',
+			],
+			'jumlah'          => [
 				'type' => 'INT(11)',
 			],
 			'status'          => [
