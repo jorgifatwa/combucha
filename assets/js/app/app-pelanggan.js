@@ -4,14 +4,16 @@ define([
     "datatables",
     "datatablesBootstrap",
     "jqvalidate",
-    "toastr"
+    "toastr",
+    "select2"
     ], function (
     $,
     bootstrap,
     datatables,
     datatablesBootstrap,
     jqvalidate,
-    toastr
+    toastr,
+    select2
     ) {
     return {
         table:null,
@@ -24,7 +26,6 @@ define([
             $(".loadingpage").hide();
         },
         initEvent : function(){
-            
         },
         initTable : function(){
             App.table = $('#table').DataTable({

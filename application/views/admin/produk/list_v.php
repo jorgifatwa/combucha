@@ -34,7 +34,8 @@
                         <tr>
                             <th>Nama</th>
                             <th>Kategori</th>
-                            <th>Harga</th>
+                            <th>Harga Modal</th>
+                            <th>Harga Jual</th>
                             <th>Gambar</th>
                             <th>Keterangan</th>
                             <th>Status</th>

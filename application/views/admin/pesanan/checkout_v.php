@@ -18,12 +18,17 @@
 <section class="content">
     <div class="container-fluid">
         <div class="card">
-            <form id="form_checkout" method="post" enctype="multipart/form-data">
+            <form id="form_checkout" action="<?php echo base_url('Pesanan/create_pesanan') ?>" method="post" enctype="multipart/form-data">
                 <div class="card-body">
                     <div class="form-group row">
                         <label class="form-label col-sm-3" for="">Nama Pelanggan</label>
                         <div class="col-sm-9">
-                            <input class="form-control" type="text" id="nama_pelanggan" name="nama_pelanggan" autocomplete="off" placeholder="Nama Pelanggan">
+                            <select id="selectBox" class="js-example-basic-single form-control" name="nama_pelanggan">
+                                <option value="">Pilih Pelanggan</option>
+                                <?php foreach ($pelanggans as $key => $pelanggan) { ?>
+                                  <option value="<?= $pelanggan->id ?>"><?= $pelanggan->nama ?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -52,7 +57,7 @@
                     </div>
                     <?php
                         foreach ($id_produk as $item) {
-                          echo '<input type="hidden" name="quantity[]" value="' . $item . '">';
+                          echo '<input type="hidden" name="id_produk[]" value="' . $item . '">';
                         } 
                         foreach ($quantity as $item) {
                           echo '<input type="hidden" name="quantity[]" value="' . $item . '">';

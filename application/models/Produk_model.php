@@ -100,6 +100,7 @@ class Produk_model extends CI_Model
 
     public function fetch_produk($limit, $start) {
         $this->db->limit($limit, $start);
+        $this->db->where("produk.is_deleted",0);  
         $query = $this->db->get("produk");
 
         if ($query->num_rows() > 0) {
@@ -110,24 +111,29 @@ class Produk_model extends CI_Model
 
     public function search_produk($keyword) {
         $this->db->like('nama', $keyword);
+        $this->db->where("produk.is_deleted",0);  
         $this->db->or_like('keterangan', $keyword);
         return $this->db->get('produk')->result();
     }
 
     public function fetch_produk_search($limit, $start, $keyword) {
+        $this->db->where("produk.is_deleted", 0); // Pertama, atur kondisi untuk is_deleted
+        $this->db->group_start(); // Mulai klausa grup agar klausa like() dan or_like() digabungkan dengan benar
         $this->db->like('nama', $keyword);
         $this->db->or_like('keterangan', $keyword);
+        $this->db->group_end(); // Akhiri klausa grup
         $this->db->limit($limit, $start);
         $query = $this->db->get('produk');
         if ($query->num_rows() > 0) {
             return $query->result();
         }
         return false;
-    }
+    }    
 
     public function record_count_search($keyword) {
         $this->db->like('nama', $keyword);
         $this->db->or_like('keterangan', $keyword);
+        $this->db->where("produk.is_deleted",0);  
         return $this->db->count_all_results("produk");
     }    
 }

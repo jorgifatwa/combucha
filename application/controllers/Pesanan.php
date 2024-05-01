@@ -8,6 +8,9 @@ class Pesanan extends Admin_Controller
 		parent::__construct();
 		$this->load->model('pesanan_model');
 		$this->load->model('produk_model');
+		$this->load->model('pelanggan_model');
+		$this->load->model('transaksi_model');
+		$this->load->model('pesanan_model');
         $this->load->library('pagination');
 	}
 
@@ -152,57 +155,62 @@ class Pesanan extends Admin_Controller
 		for ($i = 0; $i < count($_POST['quantity']); $i++) {
 			$produk[$i] = $this->produk_model->getAllById(array("produk.id" => $_POST['id_produk'][$i]));
 			foreach ($produk[$i] as $key => $value) {
-				$this->data['sub_total'][$i] = $value->harga * intval($_POST['quantity'][$i]);
+				$this->data['sub_total'][$i] = $value->harga_jual * intval($_POST['quantity'][$i]);
 				$this->data['total'] += $this->data['sub_total'][$i];
 			}
 		}
 		$this->data['nama'] = $_POST['nama'];
+		$this->data['pelanggans'] = $this->pelanggan_model->getAllById();
 		$this->data['content'] = 'admin/pesanan/checkout_v';
 		$this->load->view('admin/layouts/page', $this->data);
 	}
 
 	public function create_pesanan() 
 	{
-		$this->form_validation->set_rules('name', "Nama Harus Diisi", 'trim|required');
-
-		if ($this->form_validation->run() === TRUE) {
-			
-
+		$nama_pelanggan = $this->input->post('nama_pelanggan');
+		if (!is_numeric($nama_pelanggan)) {
 			$data = array(
-				'nama' => $this->input->post('name'),
-				'description' => $this->input->post('description'),
-				'updated_at' => date('Y-m-d H:i:s'),
-				'updated_by' => $this->data['users']->id
+				'nama' => $this->input->post('nama_pelanggan'),
+				'created_at' => date('Y-m-d H:i:s'),
+				'created_by' => $this->data['users']->id
 			);
 
-			$id = $this->input->post('id');
-
-			$update = $this->pesanan_model->update($data, array("pesanan.id" => $id));
-
-			if ($update) {
-				$this->session->set_flashdata('message', "Kategori Produk Berhasil Diubah");
-				redirect("pesanan", "refresh");
-			} else {
-				$this->session->set_flashdata('message_error', "Kategori Produk Gagal Diubah");
-				redirect("pesanan", "refresh");
-			}
-		} else {
-			if (!empty($_POST)) {
-				$id = $this->input->post('id');
-				$this->session->set_flashdata('message_error', validation_errors());
-				return redirect("pesanan/edit/" . $id);
-			} else {
-				$this->data['id'] = $this->uri->segment(3);
-				$pesanan = $this->pesanan_model->getAllById(array("pesanan.id" => $this->data['id']));
-				
-				$this->data['id'] 	= (!empty($pesanan)) ? $pesanan[0]->id : "";
-				$this->data['nama'] 	= (!empty($pesanan)) ? $pesanan[0]->nama : "";
-				$this->data['description'] = (!empty($pesanan)) ? $pesanan[0]->description : "";
-				$this->data['content'] = 'admin/pesanan/edit_v';
-				$this->load->view('admin/layouts/page', $this->data);
-			}
+			$insert = $this->pelanggan_model->insert($data);
 		}
 
+		if(isset($insert)){
+			$data_transaksi = array(
+				'id_pelanggan' => $insert,
+				'created_at' => date('Y-m-d H:i:s'),
+				'created_by' => $this->data['users']->id
+			);
+		}else{
+			$data_transaksi = array(
+				'id_pelanggan' => $this->input->post('nama_pelanggan'),
+				'created_at' => date('Y-m-d H:i:s'),
+				'created_by' => $this->data['users']->id
+			);
+		}
+
+		$insert_transaksi = $this->transaksi_model->insert($data_transaksi);
+
+		$id_produk = $this->input->post('id_produk');
+		$quantity = $this->input->post('quantity');
+		for ($i=0; $i < count($id_produk); $i++) { 
+			$data_pesanan = array(
+				'tanggal_pesanan' => date('Y-m-d H:i:s'),
+				'id_transaksi' => $insert_transaksi,
+				'id_produk' => $id_produk[$i],
+				'jumlah' => $quantity[$i],
+				'status' => 0,
+				'keterangan' => '',
+				'created_at' => date('Y-m-d H:i:s'),
+				'created_by' => $this->data['users']->id
+			);
+			$insert_pesanan = $this->pesanan_model->insert($data_pesanan);
+		}
+
+		$this->index();
 	}
 
 	public function dataList() 

@@ -4,14 +4,16 @@ define([
     "datatables",
     "datatablesBootstrap",
     "jqvalidate",
-    "toastr"
+    "toastr",
+    "select2"
     ], function (
     $,
     bootstrap,
     datatables,
     datatablesBootstrap,
     jqvalidate,
-    toastr
+    toastr,
+    select2
     ) {
     return {
         table:null,
@@ -24,6 +26,27 @@ define([
             $(".loadingpage").hide();
         },
         initEvent : function(){
+
+            $('.js-example-basic-single').select2({
+                placeholder: 'Pilih Pelanggan atau masukkan data baru',
+                allowClear: true,
+                tags: true
+            });
+
+            // Menambahkan event listener untuk menangkap saat opsi baru dipilih
+            $('#selectBox').on('select2:select', function (e) {
+                var data = e.params.data;
+
+                // Jika data yang dipilih adalah data baru (bukan yang ada dalam opsi)
+                if (data.hasOwnProperty('id') && data.id === data.text) {
+                    // Kirim data baru ke server untuk disimpan
+                    console.log('baru', data.text)
+                    console.log('baru id', data.id)
+                    // $.post('save_data.php', { newData: data.text }, function(response) {
+                    //     alert(response); // Tampilkan pesan balasan dari server
+                    // });
+                }
+            });
 
             function formatIDR(number) {
                 var formatted = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
@@ -98,10 +121,10 @@ define([
                                             <div class="card-footer">
                                             <div class="row">
                                                 <div class="col-md-4">
-                                                <p>${formatIDR(data[index].harga)}</p>
+                                                <p>${formatIDR(data[index].harga_jual)}</p>
                                                 </div>
                                                 <div class="col-md-8 text-right">
-                                                <a href="#" class="btn btn-primary add-to-cart" data-id="${data[index].id}" data-name="${data[index].nama}" data-price="${data[index].harga}" data-image="${data[index].gambar}">Tambah</a>
+                                                <a href="#" class="btn btn-primary add-to-cart" data-id="${data[index].id}" data-name="${data[index].nama}" data-price="${data[index].harga_jual}" data-image="${data[index].gambar}">Tambah</a>
                                                 </div>
                                             </div>
                                             </div>
@@ -212,7 +235,7 @@ define([
                                             <p>${formatIDR(data[index].harga)}</p>
                                             </div>
                                             <div class="col-md-8 text-right">
-                                            <a href="#" class="btn btn-primary add-to-cart" data-id="${data[index].id}" data-name="${data[index].nama}" data-price="${data[index].harga}" data-image="${data[index].gambar}">Tambah</a>
+                                            <a href="#" class="btn btn-primary add-to-cart" data-id="${data[index].id}" data-name="${data[index].nama}" data-price="${data[index].harga_jual}" data-image="${data[index].gambar}">Tambah</a>
                                             </div>
                                         </div>
                                         </div>

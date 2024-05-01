@@ -33,7 +33,6 @@ class Pelanggan extends Admin_Controller
 				'created_by' => $this->data['users']->id
 			);
 
-
 			$insert = $this->pelanggan_model->insert($data);
 
 			if ($insert) {

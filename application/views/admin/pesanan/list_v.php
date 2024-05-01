@@ -94,10 +94,10 @@
                 <div class="card-footer">
                   <div class="row">
                     <div class="col-md-4">
-                      <p><?php echo "Rp.".number_format($produk->harga) ?></p>
+                      <p><?php echo "Rp.".number_format($produk->harga_jual) ?></p>
                     </div>
                     <div class="col-md-8 text-right">
-                      <a href="#" class="btn btn-primary add-to-cart" data-id="<?php echo $produk->id ?>" data-name="<?php echo $produk->nama ?>" data-price="<?php echo $produk->harga ?>" data-image="<?php echo $produk->gambar ?>">Tambah</a>
+                      <a href="#" class="btn btn-primary add-to-cart" data-id="<?php echo $produk->id ?>" data-name="<?php echo $produk->nama ?>" data-price="<?php echo $produk->harga_jual ?>" data-image="<?php echo $produk->gambar ?>">Tambah</a>
                     </div>
                   </div>
                 </div>

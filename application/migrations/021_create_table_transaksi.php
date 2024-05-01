@@ -22,9 +22,6 @@ class Migration_create_table_transaksi extends CI_Migration {
 				'auto_increment' => TRUE,
 				'unsigned'       => TRUE,
 			],
-			'id_pesanan'          => [
-				'type' => 'TINYINT(7)',
-			],
 			'id_pelanggan'          => [
 				'type' => 'TINYINT(7)',
 			],

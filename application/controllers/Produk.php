@@ -25,7 +25,8 @@ class Produk extends Admin_Controller
 	public function create() 
 	{
 		$this->form_validation->set_rules('name', "Nama Harus Diisi", 'trim|required');
-		$this->form_validation->set_rules('harga', "Harga Harus Diisi", 'trim|required');
+		$this->form_validation->set_rules('harga_jual', "Harga Jual Harus Diisi", 'trim|required');
+		$this->form_validation->set_rules('harga_modal', "Harga Modal Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('kategori_id', "Kategori Harus Dipilih", 'trim|required');
 		$this->form_validation->set_rules('status', "Status Harus Diisi", 'trim|required');
 
@@ -33,9 +34,9 @@ class Produk extends Admin_Controller
 			
 			$data = array(
 				'nama' => $this->input->post('name'),
-				'harga' => $this->input->post('harga'),
 				'kategori_id' => $this->input->post('kategori_id'),
-				'harga' => $this->input->post('harga'),
+				'harga_jual' => str_replace(".", "", $this->input->post('harga_jual')),
+				'harga_modal' => str_replace(".", "", $this->input->post('harga_modal')),
 				'status' => $this->input->post('status'),
 				'keterangan' => $this->input->post('keterangan'),
 				'created_at' => date('Y-m-d H:i:s'),
@@ -76,7 +77,8 @@ class Produk extends Admin_Controller
 	public function edit() 
 	{
 		$this->form_validation->set_rules('name', "Nama Harus Diisi", 'trim|required');
-		$this->form_validation->set_rules('harga', "Harga Harus Diisi", 'trim|required');
+		$this->form_validation->set_rules('harga_jual', "Harga Jual Harus Diisi", 'trim|required');
+		$this->form_validation->set_rules('harga_modal', "Harga Modal Harus Diisi", 'trim|required');
 		$this->form_validation->set_rules('kategori_id', "Kategori Harus Dipilih", 'trim|required');
 		$this->form_validation->set_rules('status', "Status Harus Diisi", 'trim|required');
 
@@ -84,13 +86,13 @@ class Produk extends Admin_Controller
 			
 			$data = array(
 				'nama' => $this->input->post('name'),
-				'harga' => $this->input->post('harga'),
 				'kategori_id' => $this->input->post('kategori_id'),
-				'harga' => $this->input->post('harga'),
+				'harga_jual' => str_replace(".", "", $this->input->post('harga_jual')),
+				'harga_modal' => str_replace(".", "", $this->input->post('harga_modal')),
 				'status' => $this->input->post('status'),
 				'keterangan' => $this->input->post('keterangan'),
-				'updated_at' => date('Y-m-d H:i:s'),
-				'updated_by' => $this->data['users']->id
+				'created_at' => date('Y-m-d H:i:s'),
+				'created_by' => $this->data['users']->id
 			);
 
 			$id = $this->input->post('id');
@@ -131,7 +133,8 @@ class Produk extends Admin_Controller
 				
 				$this->data['id'] 	= (!empty($produk)) ? $produk[0]->id : "";
 				$this->data['nama'] 	= (!empty($produk)) ? $produk[0]->nama : "";
-				$this->data['harga'] 	= (!empty($produk)) ? $produk[0]->harga : "";
+				$this->data['harga_jual'] 	= (!empty($produk)) ? $produk[0]->harga_jual : "";
+				$this->data['harga_modal'] 	= (!empty($produk)) ? $produk[0]->harga_modal : "";
 				$this->data['kategori_id'] 	= (!empty($produk)) ? $produk[0]->kategori_id : "";
 				$this->data['status'] 	= (!empty($produk)) ? $produk[0]->status : "";
 				$this->data['gambar'] 	= (!empty($produk)) ? $produk[0]->gambar : "";
@@ -148,7 +151,8 @@ class Produk extends Admin_Controller
 		$columns = array(
 			0 => 'nama',
 			1 => 'kategori',
-			2 => 'harga',
+			2 => 'harga_modal',
+			2 => 'harga_jual',
 			3 => 'gambar',
 			4 => 'keterangan',
 			5 => 'status',
@@ -167,7 +171,8 @@ class Produk extends Admin_Controller
 			$search = array(
 				"produk.nama" => $search_value,
 				"kategori_produk.nama" => $search_value,
-				"produk.harga" => $search_value,
+				"produk.harga_modal" => $search_value,
+				"produk.harga_jual" => $search_value,
 				"produk.status" => $search_value,
 				"produk.keterangan" => $search_value,
 			);
@@ -200,7 +205,8 @@ class Produk extends Admin_Controller
 
 				$nestedData['id'] = $start + $key + 1;
 				$nestedData['nama'] = $data->nama;
-				$nestedData['harga'] = $data->harga;
+				$nestedData['harga_modal'] = "Rp. ".number_format($data->harga_modal);
+				$nestedData['harga_jual'] = "Rp. ".number_format($data->harga_jual);
 				$nestedData['kategori'] = $data->kategori_name;
 				
 				// Convert numeric status to string representation

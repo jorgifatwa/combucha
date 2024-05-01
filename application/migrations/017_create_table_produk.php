@@ -28,7 +28,10 @@ class Migration_create_table_produk extends CI_Migration {
 			'nama'          => [
 				'type' => 'VARCHAR(100)',
 			],
-			'harga'          => [
+			'harga_jual'          => [
+				'type' => 'INT(11)',
+			],
+			'harga_modal'=> [
 				'type' => 'INT(11)',
 			],
 			'gambar'          => [

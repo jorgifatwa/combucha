@@ -34,6 +34,47 @@ define([
                 width: "100%",
                 placeholder: "Pilih Status",
             });
+            $('#harga_modal').on('input', function () {
+                // Membersihkan input dari karakter non-numerik, kecuali koma dan titik desimal
+                var cleanInput = $(this).val().replace(/[^\d.,]/g, '');
+            
+                // Hapus tanda desimal jika lebih dari satu
+                cleanInput = cleanInput.replace(/(\..*)\./g, '$1');
+            
+                // Ganti tanda titik dengan string kosong (untuk menghindari kesalahan dalam parsing)
+                cleanInput = cleanInput.replace(/\./g, '');
+            
+                // Ubah koma menjadi titik jika digunakan sebagai pemisah desimal
+                cleanInput = cleanInput.replace(/,/g, '.');
+            
+                // Parsing input jumlah uang menjadi angka desimal
+                var jumlahUang = parseFloat(cleanInput);
+
+                $(this).val(jumlahUang.toLocaleString('id-ID', {
+                    maximumFractionDigits: 0
+                }));
+            })
+
+            $('#harga_jual').on('input', function () {
+                // Membersihkan input dari karakter non-numerik, kecuali koma dan titik desimal
+                var cleanInput = $(this).val().replace(/[^\d.,]/g, '');
+            
+                // Hapus tanda desimal jika lebih dari satu
+                cleanInput = cleanInput.replace(/(\..*)\./g, '$1');
+            
+                // Ganti tanda titik dengan string kosong (untuk menghindari kesalahan dalam parsing)
+                cleanInput = cleanInput.replace(/\./g, '');
+            
+                // Ubah koma menjadi titik jika digunakan sebagai pemisah desimal
+                cleanInput = cleanInput.replace(/,/g, '.');
+            
+                // Parsing input jumlah uang menjadi angka desimal
+                var jumlahUang = parseFloat(cleanInput);
+                
+                $(this).val(jumlahUang.toLocaleString('id-ID', {
+                    maximumFractionDigits: 0
+                }));
+            })
         },
         initTable : function(){
             App.table = $('#table').DataTable({
@@ -64,7 +105,8 @@ define([
                 "columns": [
                     { "data": "nama" },
                     { "data": "kategori" },
-                    { "data": "harga" },
+                    { "data": "harga_modal" },
+                    { "data": "harga_jual" },
                     { "data": "gambar" },
                     { "data": "keterangan" },
                     { "data": "status" },
@@ -80,7 +122,10 @@ define([
                         name: {
                             required: true
                         },
-                        harga: {
+                        harga_jual: {
+                            required: true
+                        },
+                        harga_modal: {
                             required: true
                         },
                         status: {
@@ -91,8 +136,11 @@ define([
                         name: {
                             required: "Nama Harus Diisi"
                         },
-                        harga: {
-                            required: "Harga Harus Diisi"
+                        harga_jual: {
+                            required: "Harga Jual Harus Diisi"
+                        },
+                        harga_modal: {
+                            required: "Harga Modal Harus Diisi"
                         },
                         status: {
                             required: "Status Harus Diisi"

@@ -38,9 +38,15 @@
                       </div>
                   </div>
                   <div class="form-group row">
-                      <label class="form-label col-sm-3" for="">Harga</label>
+                      <label class="form-label col-sm-3" for="">Harga Modal</label>
                       <div class="col-sm-4">
-                          <input class="form-control" type="text" id="harga" name="harga" autocomplete="off" placeholder="Harga" value="<?php echo $harga ?>">
+                          <input class="form-control" type="text" id="harga_modal" name="harga_modal" autocomplete="off" placeholder="Harga Modal" value="<?php echo $harga_modal ?>">
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="form-label col-sm-3" for="">Harga Jual</label>
+                      <div class="col-sm-4">
+                          <input class="form-control" type="text" id="harga_jual" name="harga_jual" autocomplete="off" placeholder="Harga Jual" value="<?php echo $harga_jual ?>">
                       </div>
                   </div>
                   <div class="form-group row">
