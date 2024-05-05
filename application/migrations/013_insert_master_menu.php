@@ -28,7 +28,7 @@ class Migration_insert_master_menu extends CI_Migration {
             array('id'=>10,'module_id'=>1, 'name'=>'Karyawan', 'url'=>'karyawan', 'parent_id'=>7, 'icon'=>"fa fa-circle-o", 'sequence'	=>3), 
             array('id'=>11,'module_id'=>1, 'name'=>'Pelanggan', 'url'=>'pelanggan', 'parent_id'=>7, 'icon'=>"fa fa-circle-o", 'sequence'	=>4), 
             array('id'=>12,'module_id'=>1, 'name'=>'Transaksi', 'url'=>'#', 'parent_id'=>1, 'icon'=>"fa fa-exchange-alt", 'sequence'=>2),
-            array('id'=>13,'module_id'=>1, 'name'=>'Pesanan', 'url'=>'pesanan', 'parent_id'=>12, 'icon'=>"fa fa-circle-o", 'sequence'=>1),         
+            array('id'=>13,'module_id'=>1, 'name'=>'Buat Pesanan', 'url'=>'pesanan', 'parent_id'=>12, 'icon'=>"fa fa-circle-o", 'sequence'=>1),         
         );
         $this->db->insert_batch('menu', $data_menu); 
 	} 

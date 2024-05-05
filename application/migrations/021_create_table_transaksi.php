@@ -25,6 +25,9 @@ class Migration_create_table_transaksi extends CI_Migration {
 			'id_pelanggan'          => [
 				'type' => 'TINYINT(7)',
 			],
+			'status'          => [
+				'type' => 'TINYINT(7)',
+			],
 			'created_at'      => [
 				'type' => 'DATETIME',
 			],

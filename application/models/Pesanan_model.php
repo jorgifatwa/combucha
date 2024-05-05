@@ -90,4 +90,52 @@ class Pesanan_model extends CI_Model
     
         return $result->num_rows();
     } 
+
+    function getPendapatan(){
+        $this->db->select("SUM(pesanan.jumlah * produk.harga_jual) AS total");
+        $this->db->from("pesanan");
+        $this->db->join("produk", "pesanan.id_produk = produk.id");
+        $this->db->join("transaksi", "pesanan.id_transaksi = transaksi.id");
+        $this->db->where("pesanan.is_deleted", 0);  
+        $this->db->where("transaksi.status", 0);  
+        $this->db->where("DATE(transaksi.created_at)", date("Y-m-d"));  
+
+        if(!empty($search)){
+            $this->db->group_start();
+            foreach($search as $key => $value){
+                $this->db->or_like($key,$value);    
+            }   
+            $this->db->group_end();
+        } 
+
+        $this->db->group_by("pesanan.id_transaksi");
+
+        $result = $this->db->get();
+
+        return $result->result();  
+    }
+
+    function getPendapatanBersih(){
+        $this->db->select("SUM(pesanan.jumlah * produk.harga_modal) AS total");
+        $this->db->from("pesanan");
+        $this->db->join("produk", "pesanan.id_produk = produk.id");
+        $this->db->join("transaksi", "pesanan.id_transaksi = transaksi.id");
+        $this->db->where("pesanan.is_deleted", 0);  
+        $this->db->where("transaksi.status", 0);  
+        $this->db->where("DATE(transaksi.created_at)", date("Y-m-d"));  
+
+        if(!empty($search)){
+            $this->db->group_start();
+            foreach($search as $key => $value){
+                $this->db->or_like($key,$value);    
+            }   
+            $this->db->group_end();
+        } 
+
+        $this->db->group_by("pesanan.id_transaksi");
+
+        $result = $this->db->get();
+
+        return $result->result();  
+    }
 }

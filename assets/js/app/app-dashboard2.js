@@ -41,7 +41,7 @@ define([
                 type : "GET",
                 success : function(data) {
                     var data = JSON.parse(data);
-                    // App.grafikPendapatan(data.grafik, data.tahun);
+                    App.grafikPendapatan(data.grafik, data.tahun);
                 },
                 error : function(data) {
                     // do something
@@ -53,31 +53,7 @@ define([
                 type : "GET",
                 success : function(data) {
                     var data = JSON.parse(data);
-                    // App.grafikPendapatanPerTahun(data.grafik);
-                },
-                error : function(data) {
-                    // do something
-                }
-            });
-
-            $.ajax({
-                url : App.baseUrl+"dashboard/grafikTravel",
-                type : "GET",
-                success : function(data) {
-                    var data = JSON.parse(data);
-                    // App.grafikTravel(data.grafik);
-                },
-                error : function(data) {
-                    // do something
-                }
-            });
-
-            $.ajax({
-                url : App.baseUrl+"dashboard/grafikPengeluaranKaryawan",
-                type : "GET",
-                success : function(data) {
-                    var data = JSON.parse(data);
-                    // App.grafikPengeluaranKaryawan(data.grafik);
+                    App.grafikPendapatanPerTahun(data.grafik);
                 },
                 error : function(data) {
                     // do something
@@ -128,30 +104,16 @@ define([
             var totalPendapatanArray = grafikArray.map(function (item) {
                 return parseInt(item.total_pendapatan);
             });
-            var totalBersihArray = grafikArray.map(function (item) {
-                return parseInt(item.total_bersih);
-            });
-            var totalPengeluaranArray = grafikArray.map(function (item) {
-                return parseInt(item.total_pengeluaran);
-            });
 
-            var totalJumlahPaxnArray = grafikArray.map(function (item) {
-                return parseInt(item.total_jumlah);
-            });
-
-            var totalPengeluaranKaryawanArray = grafikArray.map(function (item) {
-                return parseInt(item.total_pengeluaran_karyawan);
-            });
-
-            Highcharts.chart('container-grafik-pendapatan', {
+            Highcharts.chart('container-grafik-pendapatan-bersih-per-bulan', {
                 chart: {
                     type: 'column'
                 },
                 title: {
-                    text: 'Pendapatan Kotor Perbulan'
+                    text: 'Pendapatan Bersih Perbulan'
                 },
                 subtitle: {
-                    text: 'SKIA'
+                    text: 'Combucha'
                 },
 
                 xAxis: {
@@ -174,7 +136,7 @@ define([
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Jumlah Pendapatan Kotor (jt IDR)' // Update the yAxis title
+                        text: 'Jumlah Pendapatan Bersih (jt IDR)' // Update the yAxis title
                     },
                     labels: {
                         formatter: function () {
@@ -194,180 +156,8 @@ define([
                 },
     
                 series: [{
-                    name: 'Total Pendapatan Kotor',
-                    data: totalPendapatanArray,
-                    pointStart: 0,
-                }, 
-                {
                     name: 'Total Pendapatan Bersih',
-                    data: totalBersihArray,
-                    pointStart: 0,
-                    color: 'green'
-                }]
-            });
-
-            Highcharts.chart('container-grafik-pengeluaran', {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Pengeluaran Operasional / MOB Perbulan'
-                },
-                subtitle: {
-                    text: 'SKIA'
-                },
-
-                xAxis: {
-                    categories: [
-                        'Januari',
-                        'Februari',
-                        'Maret',
-                        'April',
-                        'Mei',
-                        'Juni',
-                        'Juli',
-                        'Agustus',
-                        'September',
-                        'Oktober',
-                        'November',
-                        'Desember'
-                    ],
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Jumlah Pengeluaran Operasional / MOB (IDR)' // Update the yAxis title
-                    },
-                    labels: {
-                        formatter: function () {
-                            return 'Rp ' + (this.value / 1000000).toLocaleString() + ' jt'; // Use toLocaleString for formatting
-                        }
-                    }
-                },
-                plotOptions: {
-                    series: {
-                        allowPointSelect: true
-                    }
-                },
-            
-                tooltip: {
-                    headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Pengeluaran = Rp. {point.y}'
-                },
-            
-                series: [{
-                    name: 'Total Pengeluaran Operasional / MOB',
-                    data: totalPengeluaranArray,
-                    pointStart: 0,
-                }]
-            });
-
-            Highcharts.chart('container-grafik-jumlah-pax', {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Jumlah Pax'
-                },
-                subtitle: {
-                    text: 'SKIA'
-                },
-
-                xAxis: {
-                    categories: [
-                        'Januari',
-                        'Februari',
-                        'Maret',
-                        'April',
-                        'Mei',
-                        'Juni',
-                        'Juli',
-                        'Agustus',
-                        'September',
-                        'Oktober',
-                        'November',
-                        'Desember'
-                    ],
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Jumlah Pax'
-                    }
-                },
-                plotOptions: {
-                    series: {
-                        allowPointSelect: true
-                    }
-                },
-            
-                tooltip: {
-                    headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Jumlah = {point.y}'
-                },
-            
-                series: [{
-                    name: 'Total Jumlah Pax Keberangkatan',
-                    data: totalJumlahPaxnArray,
-                    pointStart: 0,
-                }]
-            });
-
-            Highcharts.chart('container-grafik-pengeluaran-karyawan', {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Pengeluaran Karyawan Perbulan'
-                },
-                subtitle: {
-                    text: 'SKIA'
-                },
-
-                xAxis: {
-                    categories: [
-                        'Januari',
-                        'Februari',
-                        'Maret',
-                        'April',
-                        'Mei',
-                        'Juni',
-                        'Juli',
-                        'Agustus',
-                        'September',
-                        'Oktober',
-                        'November',
-                        'Desember'
-                    ],
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Jumlah Pengeluaran Karyawan (IDR)' // Update the yAxis title
-                    },
-                    labels: {
-                        formatter: function () {
-                            return 'Rp ' + (this.value / 1000000).toLocaleString() + ' jt'; // Use toLocaleString for formatting
-                        }
-                    }
-                },
-                plotOptions: {
-                    series: {
-                        allowPointSelect: true
-                    }
-                },
-            
-                tooltip: {
-                    headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Pengeluaran = Rp. {point.y}'
-                },
-            
-                series: [{
-                    name: 'Total Pengeluaran Karyawan',
-                    data: totalPengeluaranKaryawanArray,
+                    data: totalPendapatanArray,
                     pointStart: 0,
                 }]
             });
@@ -384,20 +174,16 @@ define([
             var totalPendapatanArray = grafikArray.map(function(item) {
                 return parseInt(item.total_pendapatan);
             });
-
-            var totalPendapatanBersihArray = grafikArray.map(function(item) {
-                return parseInt(item.total_bersih);
-            });
         
             Highcharts.chart('container-grafik-pendapatan-pertahun', {
                 chart: {
                     type: 'column'
                 },
                 title: {
-                    text: 'Pendapatan Kotor Pertahun'
+                    text: 'Pendapatan Bersih Pertahun'
                 },
                 subtitle: {
-                    text: 'SKIA'
+                    text: 'Combucha'
                 },
         
                 xAxis: {
@@ -407,7 +193,7 @@ define([
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Jumlah Pendapatan Kotor (IDR)' // Update the yAxis title
+                        text: 'Jumlah Pendapatan Bersih (IDR)' // Update the yAxis title
                     },
                     labels: {
                         formatter: function () {
@@ -428,184 +214,12 @@ define([
         
                 series: [
                     {
-                        name: 'Total Pendapatan Kotor', // You can customize the series name
-                        data: totalPendapatanArray,
-                        pointStart: 0
-                    },
-                    {
                         name: 'Total Pendapatan Bersih', // You can customize the series name
-                        data: totalPendapatanBersihArray,
+                        data: totalPendapatanArray,
                         pointStart: 0,
                         color: 'green'
                     }
                 ]
-            });
-        },
-
-        grafikTravel: function(data) {
-            // Assuming data.grafik is an object with travel_id as keys
-            var travelData = data;
-        
-            // Get unique travel_id values from the data
-            var travelIds = Object.keys(travelData);
-        
-            // Create an array to store series data
-            var seriesData = [];
-        
-            // Loop through each travel_id
-            travelIds.forEach(function (travelId) {
-                var travelInfo = travelData[travelId];
-                travelInfo = Object.values(travelInfo);
-        
-                // Accessing total_pendapatan array for each travel_id
-                var totalPendapatanArray = travelInfo.map(function (item) {
-                    return parseInt(item.transaction_count);
-                });
-        
-                // Create a series object for each travel_id
-                var seriesObject = {
-                    name: travelId,
-                    data: totalPendapatanArray,
-                    pointStart: 0,
-                };
-        
-                // Push the series object to the array
-                seriesData.push(seriesObject);
-            });
-        
-            Highcharts.chart('container-grafik-travel', {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Total Keberangkatan Pertravel'
-                },
-                subtitle: {
-                    text: 'SKIA'
-                },
-        
-                xAxis: {
-                    categories: [
-                        'Januari',
-                        'Februari',
-                        'Maret',
-                        'April',
-                        'Mei',
-                        'Juni',
-                        'Juli',
-                        'Agustus',
-                        'September',
-                        'Oktober',
-                        'November',
-                        'Desember'
-                    ],
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Jumlah Travel Keberangkatan'
-                    }
-                },
-                plotOptions: {
-                    series: {
-                        allowPointSelect: true
-                    }
-                },
-        
-                tooltip: {
-                    headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Jumlah = {point.y}'
-                },
-        
-                // Use the seriesData array to populate the series
-                series: seriesData
-            });
-        },
-
-        grafikPengeluaranKaryawan: function(data) {
-            // Assuming data.grafik is an object with travel_id as keys
-            var travelData = data;
-        
-            // Get unique travel_id values from the data
-            var travelIds = Object.keys(travelData);
-        
-            // Create an array to store series data
-            var seriesData = [];
-        
-            // Loop through each travel_id
-            travelIds.forEach(function (travelId) {
-                var travelInfo = travelData[travelId];
-                travelInfo = Object.values(travelInfo);
-        
-                // Accessing total_pendapatan array for each travel_id
-                var totalPendapatanArray = travelInfo.map(function (item) {
-                    return parseInt(item.pengeluaran_count);
-                });
-        
-                // Create a series object for each travel_id
-                var seriesObject = {
-                    name: travelId,
-                    data: totalPendapatanArray,
-                    pointStart: 0,
-                };
-        
-                // Push the series object to the array
-                seriesData.push(seriesObject);
-            });
-        
-            Highcharts.chart('container-grafik-pengeluaran-perkaryawan', {
-                chart: {
-                    type: 'column'
-                },
-                title: {
-                    text: 'Total Pengeluaran Perkaryawan Perbulan'
-                },
-                subtitle: {
-                    text: 'SKIA'
-                },
-        
-                xAxis: {
-                    categories: [
-                        'Januari',
-                        'Februari',
-                        'Maret',
-                        'April',
-                        'Mei',
-                        'Juni',
-                        'Juli',
-                        'Agustus',
-                        'September',
-                        'Oktober',
-                        'November',
-                        'Desember'
-                    ],
-                    crosshair: true
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Total Pengeluaran (IDR)' // Update the yAxis title
-                    },
-                    labels: {
-                        formatter: function () {
-                            return 'Rp ' + (this.value / 1000000).toLocaleString() + ' jt'; // Use toLocaleString for formatting
-                        }
-                    }
-                },
-                plotOptions: {
-                    series: {
-                        allowPointSelect: true
-                    }
-                },
-        
-                tooltip: {
-                    headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'Total = Rp. {point.y}'
-                },
-        
-                // Use the seriesData array to populate the series
-                series: seriesData
             });
         },
         
