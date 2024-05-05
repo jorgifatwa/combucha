@@ -34,9 +34,6 @@ class Migration_create_table_pesanan extends CI_Migration {
 			'jumlah'          => [
 				'type' => 'INT(11)',
 			],
-			'status'          => [
-				'type' => 'INT(11)',
-			],
 			'keterangan'      => [
 				'type' => 'TEXT',
 			],

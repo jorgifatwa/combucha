@@ -181,12 +181,14 @@ class Pesanan extends Admin_Controller
 		if(isset($insert)){
 			$data_transaksi = array(
 				'id_pelanggan' => $insert,
+				'status' => 0,
 				'created_at' => date('Y-m-d H:i:s'),
 				'created_by' => $this->data['users']->id
 			);
 		}else{
 			$data_transaksi = array(
 				'id_pelanggan' => $this->input->post('nama_pelanggan'),
+				'status' => 0,
 				'created_at' => date('Y-m-d H:i:s'),
 				'created_by' => $this->data['users']->id
 			);
@@ -202,7 +204,6 @@ class Pesanan extends Admin_Controller
 				'id_transaksi' => $insert_transaksi,
 				'id_produk' => $id_produk[$i],
 				'jumlah' => $quantity[$i],
-				'status' => 0,
 				'keterangan' => '',
 				'created_at' => date('Y-m-d H:i:s'),
 				'created_by' => $this->data['users']->id
