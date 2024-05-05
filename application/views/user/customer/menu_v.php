@@ -11,9 +11,9 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <link rel="shortcut icon" href="<?php echo base_url() ?>assets/user/images/favicon.png" type="">
+  <link rel="icon" type="image/x-icon" href="<?php echo base_url() ?>assets/images/icon.png">
 
-  <title> Feane </title>
+  <title> Combucha </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/user/css/bootstrap.css" />

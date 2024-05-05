@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once APPPATH . 'core/Admin_Controller.php';
-class Customer extends Admin_Controller 
+class Customer extends CI_Controller 
 {
 	public function __construct() 
 	{
@@ -31,7 +30,6 @@ class Customer extends Admin_Controller
 			$data = array(
 				'nama' => $this->input->post('nama_pelanggan'),
 				'created_at' => date('Y-m-d H:i:s'),
-				'created_by' => $this->data['users']->id
 			);
 
 			$insert = $this->pelanggan_model->insert($data);
@@ -42,14 +40,12 @@ class Customer extends Admin_Controller
 				'id_pelanggan' => $insert,
 				'status' => 1,
 				'created_at' => date('Y-m-d H:i:s'),
-				'created_by' => $this->data['users']->id
 			);
 		}else{
 			$data_transaksi = array(
 				'id_pelanggan' => $this->input->post('nama_pelanggan'),
 				'status' => 1,
 				'created_at' => date('Y-m-d H:i:s'),
-				'created_by' => $this->data['users']->id
 			);
 		}
 
@@ -65,7 +61,6 @@ class Customer extends Admin_Controller
 				'jumlah' => $quantity[$i],
 				'keterangan' => '',
 				'created_at' => date('Y-m-d H:i:s'),
-				'created_by' => $this->data['users']->id
 			);
 			$insert_pesanan = $this->pesanan_model->insert($data_pesanan);
 		}
