@@ -102,15 +102,15 @@ class Pesanan_model extends CI_Model
         $this->db->where("transaksi.status", 0);  
         $this->db->where("DATE(transaksi.created_at)", date("Y-m-d"));  
 
-        if(!empty($search)){
-            $this->db->group_start();
-            foreach($search as $key => $value){
-                $this->db->or_like($key,$value);    
-            }   
-            $this->db->group_end();
-        } 
+        // if(!empty($search)){
+        //     $this->db->group_start();
+        //     foreach($search as $key => $value){
+        //         $this->db->or_like($key,$value);    
+        //     }   
+        //     $this->db->group_end();
+        // } 
 
-        $this->db->group_by("pesanan.id_transaksi");
+        // $this->db->group_by("pesanan.id_transaksi");
 
         $result = $this->db->get();
 
@@ -126,15 +126,15 @@ class Pesanan_model extends CI_Model
         $this->db->where("transaksi.status", 0);  
         $this->db->where("DATE(transaksi.created_at)", date("Y-m-d"));  
 
-        if(!empty($search)){
-            $this->db->group_start();
-            foreach($search as $key => $value){
-                $this->db->or_like($key,$value);    
-            }   
-            $this->db->group_end();
-        } 
+        // if(!empty($search)){
+        //     $this->db->group_start();
+        //     foreach($search as $key => $value){
+        //         $this->db->or_like($key,$value);    
+        //     }   
+        //     $this->db->group_end();
+        // } 
 
-        $this->db->group_by("pesanan.id_transaksi");
+        // $this->db->group_by("pesanan.id_transaksi");
 
         $result = $this->db->get();
 
