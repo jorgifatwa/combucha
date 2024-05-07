@@ -173,8 +173,6 @@ class Pesanan_data extends Admin_Controller
 
 	public function cetak_pdf()
 	{
-		// Load library TCPDF
-		$this->load->library('tcpdf');
 
 		$data['data_pesanan'] = $this->pesanan_model->getAllHariIni();
 
