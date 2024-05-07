@@ -155,7 +155,7 @@ class Pesanan_data extends Admin_Controller
 			$response_data['msg'] = "Data Pesanan Berhasil di Lunaskan";
 			$response_data['status'] = true;
 		} else {
-			$response_data['msg'] = "ID Harus Diisi";
+			$response_data['msg'] = "ID Harus Di isi";
 		}
 
 		echo json_encode($response_data);
