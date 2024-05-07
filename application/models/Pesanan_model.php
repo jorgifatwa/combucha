@@ -21,7 +21,7 @@ class Pesanan_model extends CI_Model
     }
  
     public function getAllById($where = array()){
-        $this->db->select("pesanan.*, produk.harga_jual as harga_jual")->from("pesanan"); 
+        $this->db->select("pesanan.*, produk.harga_jual as harga_jual, produk.nama as nama_produk")->from("pesanan"); 
         $this->db->join("produk", "pesanan.id_produk = produk.id");
         $this->db->join("transaksi", "pesanan.id_transaksi = transaksi.id"); 
         $this->db->where($where);  
