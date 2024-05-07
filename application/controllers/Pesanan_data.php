@@ -171,5 +171,22 @@ class Pesanan_data extends Admin_Controller
 		return json_encode($data);
 	}
 
+	public function cetak_pdf()
+	{
+		// Load library TCPDF
+		$this->load->library('tcpdf');
+
+		$data['data_pesanan'] = $this->pesanan_model->getAllHariIni();
+
+		// Mendefinisikan view yang akan digunakan untuk menghasilkan konten PDF
+		$html = $this->load->view('admin/pesanan_data/cetak', $data, true);
+
+		// Membuat file PDF
+		$this->tcpdf->SetTitle('Data Pesanan');
+		$this->tcpdf->AddPage();
+		$this->tcpdf->writeHTML($html);
+		$this->tcpdf->Output('output.pdf', 'I'); // 'I' untuk menampilkan di browser, 'D' untuk mengunduh
+	}
+
 	
 }

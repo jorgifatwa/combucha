@@ -18,6 +18,13 @@
 <section class="content">
   <div class="container-fluid">
     <div class="card mb-3">
+        <div class="card-header">
+          <div class="row">
+              <div class="col-sm-12 text-right">
+                    <a href="<?php echo base_url() ?>pesanan_data/cetak_pdf" class="btn btn-primary"><i class="fa fa-print"></i> Print Data Hari Ini</a>
+              </div>
+          </div>
+        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered" id="table" width="100%" cellspacing="0">

@@ -33,6 +33,21 @@ class Pesanan_model extends CI_Model
         } 
         return FALSE;
     }
+
+    public function getAllHariIni($where = array()){
+        $this->db->select("pesanan.*, produk.harga_jual as harga_jual, produk.nama as nama_produk")->from("pesanan"); 
+        $this->db->join("produk", "pesanan.id_produk = produk.id");
+        $this->db->join("transaksi", "pesanan.id_transaksi = transaksi.id"); 
+        $this->db->where("pesanan.is_deleted",0);  
+        $this->db->where("DATE(pesanan.created_at)", date("Y-m-d"));
+
+        $query = $this->db->get();
+        if ($query->num_rows() >0){  
+            return $query->result(); 
+        } 
+        return FALSE;
+    }
+
     public function insert($data){
         $this->db->insert("pesanan", $data);
         return $this->db->insert_id();
