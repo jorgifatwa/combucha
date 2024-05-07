@@ -46,7 +46,7 @@ class Dashboard extends Admin_Controller {
 		for ($month = 1; $month <= 12; $month++) {
 			// Calculate total income for the current month and year
 			$totalPendapatanQuery = $this->db->query("
-				SELECT SUM(po.jumlah * pr.harga_modal) AS total
+				SELECT po.*, pr.harga_modal as harga_modal
 				FROM pesanan po
 				JOIN produk pr ON po.id_produk = pr.id
 				JOIN transaksi t ON po.id_transaksi = t.id
@@ -56,9 +56,13 @@ class Dashboard extends Admin_Controller {
 				AND YEAR(t.created_at) = $currentYear
 			");
 
-			$totalPendapatanResult = $totalPendapatanQuery->row();
+			$totalPendapatanResult = $totalPendapatanQuery->result();
 			if($totalPendapatanResult){
-				$totalPendapatan = $totalPendapatanResult->total;
+				$total = 0;
+				foreach ($totalPendapatanResult as $key => $produk) {
+					$total += $produk->jumlah * $produk->harga_modal;
+				}
+				$totalPendapatan = $total;
 			}else{
 				$totalPendapatan = 0;
 			}
