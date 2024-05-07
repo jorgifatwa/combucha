@@ -164,11 +164,8 @@ class Pesanan_data extends Admin_Controller
 	public function getDetailData(){
 		$id = $this->input->post('id');
 		$data['data_detail'] = $this->pesanan_model->getAllById(array('id_transaksi' => $id));
-		for ($i=0; $i < count($data['data_detail']); $i++) { 
-			# code...
-		}
 		foreach ($data['data_detail'] as $key => $value) {
-			$data['data_detail'][$key]->sub_total = $value->harga_produk * $value->jumlah;
+			$data['data_detail'][$key]->sub_total = $value->harga_jual * $value->jumlah;
 		}
 		echo json_encode($data);
 		return json_encode($data);
