@@ -54,7 +54,6 @@ class Dashboard extends Admin_Controller {
 				AND po.is_deleted = 0
 				AND MONTH(t.created_at) = $month
 				AND YEAR(t.created_at) = $currentYear
-				GROUP BY po.id_transaksi;
 			");
 
 			$totalPendapatanResult = $totalPendapatanQuery->row();
@@ -104,7 +103,6 @@ class Dashboard extends Admin_Controller {
 				WHERE t.status = 0
 				AND po.is_deleted = 0
 				AND YEAR(t.created_at) = $year
-				GROUP BY po.id_transaksi;
 			");
 
 
