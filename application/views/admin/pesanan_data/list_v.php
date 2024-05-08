@@ -21,7 +21,7 @@
         <div class="card-header">
           <div class="row">
               <div class="col-sm-12 text-right">
-                    <a href="<?php echo base_url() ?>pesanan_data/cetak_pdf" class="btn btn-primary"><i class="fa fa-print"></i> Print Data Hari Ini</a>
+                    <button type="button" class="btn btn-primary btn-print"><i class="fa fa-print"></i> Print Data Hari Ini</button>
               </div>
           </div>
         </div>

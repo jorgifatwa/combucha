@@ -21,6 +21,7 @@ require.config({
         "fullcalendar" : "../../plugins/fullcalendar/main.min",
         "moment" : "../../plugins/moment/moment.min",
         "datatables" : "../../plugins/datatables/jquery.dataTables.min",
+        "html2pdf" : "../../plugins/html2pdf.js-master/dist/html2pdf.bundle.min",
         "datatablesBootstrap" : "../../plugins/datatables-bs4/js/dataTables.bootstrap4.min",
         "highcharts" : "../../plugins/highchart/highcharts.src",
         "highcharts3d" : "../../plugins/highchart/highcharts-3d.src",
@@ -30,7 +31,7 @@ require.config({
         "bootstrapTimepicker" : "../../plugins/bootstrap-timepicker/bootstrap-timepicker",
         "jqueryqueue" : "../../plugins/jqueryqueue/jQuery.ajaxQueue",
         "fatZoom" : "../../plugins/jquery-fat-zoom.js/js/zoom",
-        "bsDropzone" : "../../plugins/bs-dropzone/dist/js/bs-dropzone"
+        "bsDropzone" : "../../plugins/bs-dropzone/dist/js/bs-dropzone",
         
         // "bootstrap4" : "../../plugins/bootstrap4/js/bootstrap.bundle.min",
         // "jQueryUI" : "../../plugins/jquery-ui/jquery-ui.min",
@@ -229,6 +230,13 @@ require.config({
             deps: ["jQuery"],
             init: function () {
                 console.log('toastr inited..');
+            }
+        },
+        "html2pdf": {
+            exports: "html2pdf",
+            deps: ["jQuery"],
+            init: function () {
+                console.log('html2pdf inited..');
             }
         },
         "Handsontable": {

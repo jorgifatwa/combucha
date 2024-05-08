@@ -5,7 +5,8 @@ define([
     "datatablesBootstrap",
     "jqvalidate",
     "toastr",
-    "select2"
+    "select2",
+    "html2pdf"
     ], function (
     $,
     bootstrap,
@@ -13,7 +14,8 @@ define([
     datatablesBootstrap,
     jqvalidate,
     toastr,
-    select2
+    select2,
+    html2pdf
     ) {
     return {
         table:null,
@@ -26,6 +28,28 @@ define([
             $(".loadingpage").hide();
         },
         initEvent : function(){
+            $('.btn-print').on('click', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: App.baseUrl+'pesanan_data/cetak_pdf',
+                    success: function(data) {
+                        // var elementHTML = data;
+                        // html2pdf().from(data).save();
+                        var opt = {
+                            margin:       0.5,
+                            filename:     'myfile.pdf',
+                            image:        { type: 'jpeg', quality: 0.98 },
+                            html2canvas:  { scale: 2 },
+                            jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+                          };
+                          
+                        // New Promise-based usage:
+                        html2pdf().set(opt).from(data).save();
+                    }
+                });
+                // Source HTMLElement or a string containing HTML.
+            })
             $('#table tbody').on( 'click', '.btn-detail', function (e) {
                 e.preventDefault()
                 var id = $(this).attr('data-id');
