@@ -5,7 +5,7 @@ class Profile extends Admin_Controller {
  	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('profile_model');
+		$this->load->model('user_model');
 	}  
 	public function index()
 	{ 
@@ -23,7 +23,7 @@ class Profile extends Admin_Controller {
 				); 
 				$user_id = $this->input->post('id'); 
 
-				$update = $this->profile_model->update($data,array("id"=>$user_id));
+				$update = $this->user_model->update($data,array("id"=>$user_id));
 				 
 				$this->session->set_flashdata('message', "Profile telah diperbaharui");
 				redirect("profile","refresh"); 
