@@ -104,6 +104,7 @@ class Pesanan_data extends Admin_Controller
 			foreach ($datas as $key => $data) {
 
 				$edit_url = "";
+				$lunas_url = "";
 				$delete_url = "";
 
 				if ($this->data['is_can_edit'] && $data->is_deleted == 0) {
@@ -111,16 +112,22 @@ class Pesanan_data extends Admin_Controller
 				}
 
 				if($data-> status == 1){
-					$delete_url = "<a href='#'
-						url='" . base_url() . "pesanan_data/destroy/" . $data->id . "/" . $data->status . "'
-						class='btn btn-sm btn-success white delete'>Lunaskan
+					$lunas_url = "<a href='#'
+						url='" . base_url() . "pesanan_data/lunas/" . $data->id . "/" . $data->status . "'
+						class='btn btn-sm btn-success white lunas'>Lunaskan
 						</a>";
 				}
+
+				$delete_url = "<a href='#'
+						url='" . base_url() . "pesanan_data/destroy/" . $data->id . "/" . $data->is_deleted . "'
+						class='btn btn-sm btn-danger white delete'>Hapus
+						</a>";
+						
 				$nestedData['id'] = $start + $key + 1;
 				$nestedData['tanggal'] = $data->created_at;
 				$nestedData['status'] = $data->status == 0 ? 'Lunas' : 'Tidak Lunas';
 				$nestedData['nama_pelanggan'] = $data->nama_pelanggan;
-				$nestedData['action'] = $edit_url . " " . $delete_url;
+				$nestedData['action'] = $edit_url . " " . $lunas_url." ".$delete_url;
 				$new_data[] = $nestedData;
 			}
 		}
@@ -135,7 +142,7 @@ class Pesanan_data extends Admin_Controller
 		echo json_encode($json_data);
 	}
 
-	public function destroy() 
+	public function lunas() 
 	{
 		$response_data = array();
 		$response_data['status'] = false;
@@ -153,6 +160,33 @@ class Pesanan_data extends Admin_Controller
 
 			$response_data['data'] = $data;
 			$response_data['msg'] = "Data Pesanan Berhasil di Lunaskan";
+			$response_data['status'] = true;
+		} else {
+			$response_data['msg'] = "ID Harus Di isi";
+		}
+
+		echo json_encode($response_data);
+	}
+
+	public function destroy() 
+	{
+		$response_data = array();
+		$response_data['status'] = false;
+		$response_data['msg'] = "";
+		$response_data['data'] = array();
+
+		$id = $this->uri->segment(3);
+		$is_deleted = $this->uri->segment(4);
+		if (!empty($id)) {
+			$this->load->model("pesanan_data_model");
+			$data = array(
+				'is_deleted' => ($is_deleted == 1) ? 0 : 1,
+			);
+			$update = $this->pesanan_data_model->update($data, array("id" => $id));
+			$update_transaksi = $this->pesanan_model->update($data, array("id_transaksi" => $id));
+
+			$response_data['data'] = $data;
+			$response_data['msg'] = "Data Pesanan Berhasil di Hapus";
 			$response_data['status'] = true;
 		} else {
 			$response_data['msg'] = "ID Harus Di isi";

@@ -204,6 +204,24 @@ define([
             }
         },
         initConfirm :function(){
+            $('#table tbody').on( 'click', '.lunas', function () {
+                var url = $(this).attr("url");
+                console.log(url);
+                App.confirm("Apakah anda yakin untuk mengubah ini?",function(){
+                   $.ajax({
+                      method: "GET",
+                      url: url
+                    }).done(function( msg ) {
+                        var data = JSON.parse(msg);
+                        if (data.status == false) {
+                            toastr.error(data.msg);
+                        } else {
+                            toastr.success(data.msg);
+                            App.table.ajax.reload(null, true);
+                        }
+                    });
+                })
+            });
             $('#table tbody').on( 'click', '.delete', function () {
                 var url = $(this).attr("url");
                 console.log(url);
