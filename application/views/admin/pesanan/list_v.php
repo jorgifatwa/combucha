@@ -50,7 +50,7 @@
                 </table>
                 <div class="text-right mt-3">
                     <button type="submit" id="checkout" class="btn btn-success">Checkout</a>
-                    <button id="clear-cart" class="btn btn-danger">Clear Cart</button>
+                    <button id="clear-cart" type="button" class="btn btn-danger">Clear Cart</button>
                 </div>
             </div>
           </div>

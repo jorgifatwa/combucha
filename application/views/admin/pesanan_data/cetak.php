@@ -19,7 +19,7 @@
     }
 </style>
 <center>
-    <h1>Data Pesanan</h1>
+    <h1>Transaksi Penjualan</h1>
 </center>
 <table>
     <thead>
