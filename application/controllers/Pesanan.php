@@ -211,7 +211,7 @@ class Pesanan extends Admin_Controller
 			$insert_pesanan = $this->pesanan_model->insert($data_pesanan);
 		}
 
-		$this->index();
+		redirect('Pesanan/');
 	}
 
 	public function dataList() 
